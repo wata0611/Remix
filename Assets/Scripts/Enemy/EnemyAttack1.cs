@@ -5,7 +5,8 @@ using UnityEngine;
 public class EnemyAttack1 : EnemyAttackAbstract
 {
     [SerializeField] Vector3 targetPos;
-    [SerializeField] GameManager gameManager;
+
+    GameManager gameManager;
 
     private float actionDuration; // ¶¬‚³‚ê‚Ä‚©‚çƒAƒNƒVƒ‡ƒ“Š®—¹‚Ü‚Å‚ÌŠÔ
     private Vector3 startPos;
@@ -13,6 +14,7 @@ public class EnemyAttack1 : EnemyAttackAbstract
     void Start()
     {
         base.Start();
+        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         actionDuration = actionTime - gameManager.ElapsedTime;
         startPos = transform.position;
     }

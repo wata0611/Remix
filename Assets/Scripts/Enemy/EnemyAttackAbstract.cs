@@ -21,7 +21,7 @@ abstract public class EnemyAttackAbstract : MonoBehaviour
         elapsedTimeFromSpown += Time.deltaTime;
     }
 
-    protected void Damage(ref PlayerController player)
+    protected void Damage(PlayerController player)
     {
         player.Damage(damage);
         Destroy(gameObject);
@@ -33,7 +33,7 @@ abstract public class EnemyAttackAbstract : MonoBehaviour
         if(collision.gameObject.tag == "Player")
         {
             PlayerController player = collision.gameObject.GetComponent<PlayerController>();
-            Damage(ref player);
+            Damage(player);
         }   
     }
 
