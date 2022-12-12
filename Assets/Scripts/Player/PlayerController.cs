@@ -61,4 +61,10 @@ public class PlayerController : MonoBehaviour
             transform.Translate(-1.0f * moveSpeed, 0f, 0f);
         }
     }
+
+    public void Damage(int damage)
+    {
+        HP -= damage;
+        Debug.Log("HP:" + HP.ToString());
+    }
 }
