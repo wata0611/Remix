@@ -5,20 +5,22 @@ using UnityEngine;
 public class EnemyAttack1 : EnemyAttackAbstract
 {
     [SerializeField] Vector3 targetPos;
+    [SerializeField] GameManager gameManager;
 
-    private float elapsedTime;
+    private float actionDuration; // ê∂ê¨Ç≥ÇÍÇƒÇ©ÇÁÉAÉNÉVÉáÉìäÆóπÇ‹Ç≈ÇÃéûä‘
     private Vector3 startPos;
     // Start is called before the first frame update
     void Start()
     {
-        elapsedTime = 0f;
+        base.Start();
+        actionDuration = actionTime - gameManager.ElapsedTime;
         startPos = transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
-        elapsedTime += Time.deltaTime;
+        base.Update();
         Action();
     }
 
@@ -29,7 +31,7 @@ public class EnemyAttack1 : EnemyAttackAbstract
 
     private void MoveToTargetPos()
     {
-        float rate = Mathf.Clamp01(elapsedTime / actionTime);
+        float rate = Mathf.Clamp01(elapsedTimeFromSpown / actionDuration);
         gameObject.transform.position = Vector3.Lerp(startPos, targetPos, rate);
     }
     

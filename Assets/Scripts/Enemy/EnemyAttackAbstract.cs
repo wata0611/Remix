@@ -7,17 +7,18 @@ abstract public class EnemyAttackAbstract : MonoBehaviour
     [SerializeField] protected int damage = 10;
     [SerializeField] protected float actionTime = 1f;
 
+    protected float elapsedTimeFromSpown;
 
     // Start is called before the first frame update
-    void Start()
+    protected void Start()
     {
-        
+        elapsedTimeFromSpown = 0f;
     }
 
     // Update is called once per frame
-    void Update()
+    protected void Update()
     {
-        
+        elapsedTimeFromSpown += Time.deltaTime;
     }
 
     protected void Damage(ref PlayerController player)
