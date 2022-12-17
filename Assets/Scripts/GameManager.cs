@@ -71,7 +71,7 @@ public class GameManager : MonoBehaviour
     {
         ElapsedTime = 0f;
         GamePhase = GAME_PHASE.WAIT_PHASE;
-        PlayPhase = PLAY_PHASE.GAME_PHASE;
+        PlayPhase = PLAY_PHASE.START_PHASE;
         BeforeGamePhase = BEFORE_GAME_PHASE.DEFENCE_PHASE;
         stateDataIdx = 0;
         DoneStartPhase = false;
