@@ -6,12 +6,12 @@ using UnityEngine.UI;
 public class WaitUIController : MonoBehaviour
 {
     [SerializeField] Text counterText;
-    [SerializeField] float durationTime = 2f/3;
+    [SerializeField] float durationTime = 2f / 3;
 
     float textChangeTimer;
     int textCounter;
 
-    float debugTimer = 0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,11 +37,6 @@ public class WaitUIController : MonoBehaviour
             textCounter = 1;
         }
         counterText.text = textCounter.ToString();
-
-        if(textChangeTimer >= durationTime * 3)
-        {
-            gameObject.SetActive(false);
-        }
     }
 
     public void InitTextTimer()

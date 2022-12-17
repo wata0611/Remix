@@ -27,7 +27,7 @@ public enum BEFORE_GAME_PHASE
 
 public class GameManager : MonoBehaviour
 {
-    string stateManagerCSVPath = "CSV/StateManager";
+    const string STATE_MANAGER_CSV_PATH = "CSV/StateManager";
     const int STATE_DATE_ELAPSED_TIME_IDX = 0;
     const int STATE_DATE_PHASE_IDX = 1;
     struct StateData
@@ -51,6 +51,10 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] public float EnemyAttackBufferTime { set; get; }
     [SerializeField] public float BeatBufferTime { set; get; }
+    [SerializeField] GameObject attackWaitCanvas;
+    [SerializeField] WaitUIController attackWaitController;
+    [SerializeField] GameObject defenceWaitCanvas;
+    [SerializeField] WaitUIController defenceWaitController;
 
     private void Awake()
     {
@@ -63,7 +67,7 @@ public class GameManager : MonoBehaviour
     {
         ElapsedTime = 0f;
         GamePhase = GAME_PHASE.WAIT_PHASE;
-        PlayPhase = PLAY_PHASE.START_PHASE;
+        PlayPhase = PLAY_PHASE.GAME_PHASE;
         BeforeGamePhase = BEFORE_GAME_PHASE.DEFENCE_PHASE;
         stateDataIdx = 0;
         DoneStartPhase = false;
@@ -98,7 +102,7 @@ public class GameManager : MonoBehaviour
 
     void SetStateDataList()
     {
-        List<string[]> dataList = CSVReader.ReadCSV(stateManagerCSVPath);
+        List<string[]> dataList = CSVReader.ReadCSV(STATE_MANAGER_CSV_PATH);
         for(int i = 0; i < dataList.Count; i++)
         {
             StateData stateDataUnit;
@@ -137,6 +141,7 @@ public class GameManager : MonoBehaviour
             case PLAY_PHASE.GAME_PHASE:
                 ElapsedTime += Time.deltaTime;
                 StateManager();
+                GamePhaseMain();
                 break;
             case PLAY_PHASE.EMD_PHASE:
                 break;
@@ -150,17 +155,46 @@ public class GameManager : MonoBehaviour
         switch (GamePhase)
         {
             case GAME_PHASE.WAIT_PHASE:
-                break;
-            case GAME_PHASE.ATTACK_PHASE:
-                if(BeforeGamePhase != BEFORE_GAME_PHASE.DEFENCE_PHASE)
+                if(BeforeGamePhase == BEFORE_GAME_PHASE.ATTACK_PHASE)
                 {
-                    BeforeGamePhase = BEFORE_GAME_PHASE.DEFENCE_PHASE;
+                    if (!defenceWaitCanvas.activeSelf)
+                    {
+                        defenceWaitCanvas.SetActive(true);
+                        defenceWaitController.InitTextTimer();
+                    }
+                }
+                else
+                {
+                    if (!attackWaitCanvas.activeSelf)
+                    {
+                        attackWaitCanvas.SetActive(true);
+                        attackWaitController.InitTextTimer();
+                    }
                 }
                 break;
-            case GAME_PHASE.DEFENCE_PHASE:
+
+            case GAME_PHASE.ATTACK_PHASE:
+                if (attackWaitCanvas.activeSelf)
+                {
+                    attackWaitCanvas.SetActive(false);
+                }
+
+
                 if (BeforeGamePhase != BEFORE_GAME_PHASE.ATTACK_PHASE)
                 {
                     BeforeGamePhase = BEFORE_GAME_PHASE.ATTACK_PHASE;
+                }
+                break;
+
+            case GAME_PHASE.DEFENCE_PHASE:
+                if (defenceWaitCanvas.activeSelf)
+                {
+                    defenceWaitCanvas.SetActive(false);
+                }
+
+                if (BeforeGamePhase != BEFORE_GAME_PHASE.DEFENCE_PHASE)
+                {
+                    BeforeGamePhase = BEFORE_GAME_PHASE.DEFENCE_PHASE;
                 }
                 break;
         }
