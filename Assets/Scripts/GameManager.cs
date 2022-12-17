@@ -55,6 +55,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] WaitUIController attackWaitController;
     [SerializeField] GameObject defenceWaitCanvas;
     [SerializeField] WaitUIController defenceWaitController;
+    [SerializeField] AudioSource gameMusic;
+    [SerializeField] GameObject startCanvas;
+    [SerializeField] GameObject gameOverCanvas;
+    [SerializeField] GameObject clearCanvas;
 
     private void Awake()
     {
@@ -134,11 +138,23 @@ public class GameManager : MonoBehaviour
         switch (PlayPhase)
         {
             case PLAY_PHASE.START_PHASE:
-
+                StartMain();
+                if (DoneStartPhase)
+                {
+                    startCanvas.SetActive(false);
+                    PlayPhase = PLAY_PHASE.INIT_PHASE;
+                }
                 break;
             case PLAY_PHASE.INIT_PHASE:
+                PlayPhase = PLAY_PHASE.GAME_PHASE;
+                DoneInitPhase = true;
                 break;
             case PLAY_PHASE.GAME_PHASE:
+                if (!gameMusic.isPlaying)
+                {
+                    gameMusic.Play();
+                }
+
                 ElapsedTime += Time.deltaTime;
                 StateManager();
                 GamePhaseMain();
@@ -197,6 +213,14 @@ public class GameManager : MonoBehaviour
                     BeforeGamePhase = BEFORE_GAME_PHASE.DEFENCE_PHASE;
                 }
                 break;
+        }
+    }
+
+    void StartMain()
+    {
+        if (Input.anyKeyDown)
+        {
+            DoneStartPhase = true;
         }
     }
 }
