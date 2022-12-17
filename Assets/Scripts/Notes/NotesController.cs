@@ -24,9 +24,11 @@ public class NotesController : MonoBehaviour
     MOVE_TO_TARGET moveToTarget;
 
     public float BeatTime { set; private get; }
+    public int Damage { private set; get; }
 
     [SerializeField] SpriteRenderer renderer;
     [SerializeField] float missEndDuration = 5f;
+    [SerializeField] int damage = 10;
     GameManager gameManager;
     float elapsedTimeFromSpawn;
     float elapsedTimeFromMiss;
@@ -35,7 +37,6 @@ public class NotesController : MonoBehaviour
     Vector2 targetPos;
     Vector2 endPos;
     Vector2 enemyPos;
-    float rate;
 
     bool moveToEndPos;
     
@@ -59,6 +60,7 @@ public class NotesController : MonoBehaviour
         EnableBeat = true;
         moveToEndPos = false;
         moveToTarget = MOVE_TO_TARGET.BEAT;
+        Damage = damage;
     }
 
     public void SetGameManager(GameManager manager)
