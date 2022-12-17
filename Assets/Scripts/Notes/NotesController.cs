@@ -50,7 +50,7 @@ public class NotesController : MonoBehaviour
         Vector3 enemyTargetPosVec3 = GameObject.FindGameObjectWithTag("Enemy").transform.position;
         targetPos = new Vector2(targetPosVec3.x, targetPosVec3.y);
         endPos = new Vector2(endTargetPosVec3.x, endTargetPosVec3.y);
-        enemyPos = new Vector2(enemyPos.x, enemyPos.y);
+        enemyPos = new Vector2(enemyTargetPosVec3.x, enemyTargetPosVec3.y);
         startPos = new Vector2(transform.position.x, transform.position.y);
         elapsedTimeFromSpawn = 0f;
         elapsedTimeFromMiss = 0f;
