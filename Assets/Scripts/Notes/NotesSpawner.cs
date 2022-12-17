@@ -59,21 +59,24 @@ public class NotesSpawner : MonoBehaviour
 
     void SpawnManager()
     {
-        float spawnTime = notesDataList[spawnIdx].beatTime - gameManager.BeatBufferTime;
+        
         if (spawnIdx < notesDataList.Count)
         {
+            float spawnTime = notesDataList[spawnIdx].beatTime - gameManager.BeatBufferTime;
             if (gameManager.ElapsedTime >= spawnTime)
             {
-                SpawnEnemy(notesDataList[spawnIdx].beatTime, notesDataList[spawnIdx].spawnPosNum);
+                SpawnEnemy(notesDataList[spawnIdx].beatTime, notesDataList[spawnIdx].spawnPosNum, spawnIdx);
                 spawnIdx++;
             }
         }
     }
 
-    void SpawnEnemy(float beatTime, int targetPosNum)
+    void SpawnEnemy(float beatTime, int targetPosNum, int idx)
     {
-        GameObject notesObj = Instantiate(notes, spawnPosTransform[targetPosNum]);
+        GameObject notesObj = Instantiate(notes);
+        notesObj.transform.position = transform.position;
         notesObj.GetComponent<NotesController>().BeatTime = beatTime;
+        notesObj.GetComponent<NotesController>().Number = idx;
         notesObj.GetComponent<NotesController>().SetGameManager(gameManager);
     }
 }

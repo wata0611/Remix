@@ -8,6 +8,8 @@ TagManager:
   - GameManager
   - TargetPos
   - Notes
+  - endTargetPos
+  - Enemy
   layers:
   - Default
   - TransparentFX

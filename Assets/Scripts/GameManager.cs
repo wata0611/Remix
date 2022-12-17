@@ -49,8 +49,8 @@ public class GameManager : MonoBehaviour
     public bool DoneGamePhase { set; get; }
     public bool DoneEndPhase { set; get; }
 
-    [SerializeField] public float EnemyAttackBufferTime { set; get; }
-    [SerializeField] public float BeatBufferTime { set; get; }
+    [SerializeField] public float EnemyAttackBufferTime = 0.7f;
+    [SerializeField] public float BeatBufferTime = 0.7f;
     [SerializeField] GameObject attackWaitCanvas;
     [SerializeField] WaitUIController attackWaitController;
     [SerializeField] GameObject defenceWaitCanvas;
