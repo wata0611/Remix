@@ -1950,6 +1950,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8108575149398944558, guid: fdb09d182e483d1408af3f9fdaeffe66, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8108575149398944558, guid: fdb09d182e483d1408af3f9fdaeffe66, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8108575149398944558, guid: fdb09d182e483d1408af3f9fdaeffe66, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8108575149398944558, guid: fdb09d182e483d1408af3f9fdaeffe66, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8108575149398944558, guid: fdb09d182e483d1408af3f9fdaeffe66, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -160
+      objectReference: {fileID: 0}
+    - target: {fileID: 8108575149398944558, guid: fdb09d182e483d1408af3f9fdaeffe66, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -220
+      objectReference: {fileID: 0}
     - target: {fileID: 8108575149591103747, guid: fdb09d182e483d1408af3f9fdaeffe66, type: 3}
       propertyPath: m_Name
       value: DifenseSceneCanvas
