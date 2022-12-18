@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class JudgeBeatManager : MonoBehaviour
 {
+    [SerializeField] GameObject seObject;
     List<GameObject> judgeGoodTargetObjList;
     List<GameObject> judgeBadTargetObjList;
     // Start is called before the first frame update
@@ -21,7 +22,7 @@ public class JudgeBeatManager : MonoBehaviour
 
     void JudgeBeat()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Return))
         {
             if(judgeGoodTargetObjList.Count > 0)
             {
@@ -31,6 +32,7 @@ public class JudgeBeatManager : MonoBehaviour
                 notes.Status = NotesController.NOTES_STATUS.GOOD;
                 notes.ColorChanger();
 
+                Instantiate(seObject);
                 RemoveJudgeBadBeat(notesObj);
                 RemoveJudgeGoodBeat(notesObj);
                 return;

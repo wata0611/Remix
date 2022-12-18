@@ -10,7 +10,7 @@ public class EnemyBoss : MonoBehaviour
     public int HP { set; get; }
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         HP = maxHP;
     }
@@ -32,7 +32,14 @@ public class EnemyBoss : MonoBehaviour
 
     void Damage(int damage)
     {
-        HP -= damage;
-        Debug.Log("EnemyHP:"+HP.ToString());
+        if (HP > 0)
+        {
+            HP -= damage;
+            if(HP < 0)
+            {
+                HP = 0;
+            }
+            Debug.Log("EnemyHP:" + HP.ToString());
+        }
     }
 }
