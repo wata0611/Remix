@@ -89,7 +89,7 @@ public class PlayerController : MonoBehaviour
 
     public void InitPos()
     {
-        transform.position = startPos;
+        transform.position = new Vector2(startPos.x, startPos.y);
     }
 
     void Invisible()
@@ -97,6 +97,8 @@ public class PlayerController : MonoBehaviour
 
         if (invisible)
         {
+            invisibleTimer += Time.deltaTime;
+            blinkTimer += Time.deltaTime;
             Blink();
             InvisibleReset();
         }

@@ -12,12 +12,13 @@ public class EnemyAttack2BeamController : EnemyAttack2
     void Start()
     {
         elapsedTimeFromLaunch = 0f;
+        gameObject.SetActive(true);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (transform.parent.GetComponent<EnemyAttack2>().LaunchFlg)
+        if (transform.parent.GetComponent<EnemyAttackController3>().GetLaunchedFlg())
         {
             elapsedTimeFromLaunch += Time.deltaTime;
         }

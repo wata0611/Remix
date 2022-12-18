@@ -43,11 +43,7 @@ public class EnemySpawner : MonoBehaviour
         for(int i = 0; i < dataList.Count; i++)
         {
             EnemySpawnData enemySpawnData;
-            if(!float.TryParse(dataList[i][TIME_IDX], out enemySpawnData.attackTime))
-            {
-                Debug.Log("i:" + i.ToString() + ", time:" + dataList[i][TIME_IDX]);
-            }
-            //enemySpawnData.attackTime = float.Parse(dataList[i][TIME_IDX]);
+            enemySpawnData.attackTime = float.Parse(dataList[i][TIME_IDX]);
             enemySpawnData.targetPosNum = int.Parse(dataList[i][POS_IDX]);
             enemySpawnData.beamAngle = float.Parse(dataList[i][BEAM_ANGLE_IDX]);
             enemySpawnDataList.Add(enemySpawnData);

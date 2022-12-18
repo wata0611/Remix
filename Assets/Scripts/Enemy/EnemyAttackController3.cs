@@ -5,14 +5,18 @@ using UnityEngine;
 public class EnemyAttackController3 : MonoBehaviour
 {
     [SerializeField] GameObject beam;
+    [SerializeField] GameObject attackSound;
+    [SerializeField] float destroyTime = 1f;
     public float AttackTime { set; private get; }
     GameManager gameManager;
     bool launched;
+    bool doneDestroy;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         launched = false;
+        doneDestroy = false;
     }
 
     public void SetGameManager(GameManager manager)
@@ -31,6 +35,7 @@ public class EnemyAttackController3 : MonoBehaviour
     {
         if(!launched && gameManager.ElapsedTime >= AttackTime)
         {
+            Instantiate(attackSound);
             LaunchBeam();
         }
     }
@@ -45,8 +50,17 @@ public class EnemyAttackController3 : MonoBehaviour
     {
         if(launched && !beam.activeSelf)
         {
-            Destroy(gameObject);
+            if (!doneDestroy)
+            {
+                Destroy(gameObject);
+                doneDestroy = true;
+            }
         }
+    }
+
+    public bool GetLaunchedFlg()
+    {
+        return launched;
     }
     
 }

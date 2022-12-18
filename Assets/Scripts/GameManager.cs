@@ -211,7 +211,6 @@ public class GameManager : MonoBehaviour
                 }
                 if (!attackMain.activeSelf)
                 {
-                    playerMove.InitPos();
                     attackMain.SetActive(true);
                 }
 
