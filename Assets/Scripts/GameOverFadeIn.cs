@@ -22,7 +22,10 @@ public class GameOverFadeIn : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GetComponent<Image>().color = new Color(red, green, blue, alfa);
-        alfa += speed;
+        if (false)
+        {
+            GetComponent<Image>().color = new Color(red, green, blue, alfa);
+            alfa += speed;
+        }
     }
 }
