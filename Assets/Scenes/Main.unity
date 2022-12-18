@@ -1799,6 +1799,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 288275202}
     m_Modifications:
+    - target: {fileID: 5448457406220329784, guid: 656e7619ce2e7d44a9cf5775b80b0007, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5448457406220329796, guid: 656e7619ce2e7d44a9cf5775b80b0007, type: 3}
       propertyPath: m_Name
       value: MissEndPos
