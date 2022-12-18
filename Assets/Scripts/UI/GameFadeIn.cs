@@ -29,7 +29,6 @@ public class GameFadeIn : MonoBehaviour
             fadeTimer += Time.deltaTime;
             float alpha = 1f - (fadeTimer / fadeTime);
             panel.color = new Color(panel.color.r, panel.color.g, panel.color.b, alpha);
-            Debug.Log(alpha);
             if (alpha <= 0)
             {
                 DoneFade = true;

@@ -14,7 +14,7 @@ public class EnemyBoss : MonoBehaviour
     [SerializeField] GameObject bossEliminatedSound;
     [SerializeField] GameObject flush;
     [SerializeField] float flushSpan = 0.1f;
-    [SerializeField] GameObject explosionEffect;
+    [SerializeField] GameObject damageObj;
 
     public int HP { set; get; }
     public bool Eliminated { set; get; }
@@ -68,6 +68,7 @@ public class EnemyBoss : MonoBehaviour
             {
                 HP = 0;
             }
+            Instantiate(damageObj);
             Debug.Log("EnemyHP:" + HP.ToString());
         }
     }
@@ -101,7 +102,7 @@ public class EnemyBoss : MonoBehaviour
 
     void FadeEffect(float timer)
     {
-        float alpha = 1f - ((timer - noneSpan) / eliminatedTime);
+        float alpha = 1f - (timer / (eliminatedTime - noneSpan));
         renderer.color = new Color(renderer.color.r, renderer.color.g, renderer.color.b, alpha);
         Magnitude();
         if(timer > eliminatedTime)
@@ -141,5 +142,15 @@ public class EnemyBoss : MonoBehaviour
         {
             flush.SetActive(false);
         }
+    }
+
+    public bool GetEffectStart()
+    {
+        return effectStart;
+    }
+
+    public Vector3 GetInitPos()
+    {
+        return initPos;
     }
 }

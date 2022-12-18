@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour
 {
     [SerializeField] int maxHP = 100;
+    [SerializeField] GameObject seObj;
     public int HP { set; get; }
     // Start is called before the first frame update
     void Awake()
@@ -21,6 +22,7 @@ public class PlayerManager : MonoBehaviour
             {
                 HP = 0;
             }
+            Instantiate(seObj);
             Debug.Log("HP:" + HP.ToString());
         }
     }
