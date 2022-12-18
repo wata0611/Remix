@@ -60,6 +60,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject gameOverCanvas;
     [SerializeField] GameObject clearCanvas;
     [SerializeField] GameObject gameStartSound;
+    [SerializeField] GameObject attackMain;
+    [SerializeField] GameObject defenceMain;
+    [SerializeField] PlayerController playerMove;
 
     private void Awake()
     {
@@ -173,6 +176,16 @@ public class GameManager : MonoBehaviour
         switch (GamePhase)
         {
             case GAME_PHASE.WAIT_PHASE:
+                if (attackMain.activeSelf)
+                {
+                    attackMain.SetActive(false);
+                }
+                if (defenceMain.activeSelf)
+                {
+                    defenceMain.SetActive(false);
+                }
+
+
                 if(BeforeGamePhase == BEFORE_GAME_PHASE.ATTACK_PHASE)
                 {
                     if (!defenceWaitCanvas.activeSelf)
@@ -196,6 +209,11 @@ public class GameManager : MonoBehaviour
                 {
                     attackWaitCanvas.SetActive(false);
                 }
+                if (!attackMain.activeSelf)
+                {
+                    playerMove.InitPos();
+                    attackMain.SetActive(true);
+                }
 
 
                 if (BeforeGamePhase != BEFORE_GAME_PHASE.ATTACK_PHASE)
@@ -208,6 +226,10 @@ public class GameManager : MonoBehaviour
                 if (defenceWaitCanvas.activeSelf)
                 {
                     defenceWaitCanvas.SetActive(false);
+                }
+                if (!defenceMain.activeSelf)
+                {
+                    defenceMain.SetActive(true);
                 }
 
                 if (BeforeGamePhase != BEFORE_GAME_PHASE.DEFENCE_PHASE)

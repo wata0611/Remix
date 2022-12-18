@@ -24,6 +24,7 @@ public class EnemyAttackController3 : MonoBehaviour
     void Update()
     {
         AttackManager();
+        VanishEnemy();
     }
 
     void AttackManager()
@@ -39,4 +40,13 @@ public class EnemyAttackController3 : MonoBehaviour
         beam.SetActive(true);
         launched = true;
     }
+
+    void VanishEnemy()
+    {
+        if(launched && !beam.activeSelf)
+        {
+            Destroy(gameObject);
+        }
+    }
+    
 }

@@ -40,11 +40,12 @@ public class EnemyAttack2BeamController : EnemyAttack2
 
     void VanishBeam()
     {
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 
     void BeamDamage(PlayerController player)
     {
         player.Damage(damage);
     }
+
 }

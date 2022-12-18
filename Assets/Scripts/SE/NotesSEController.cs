@@ -5,12 +5,14 @@ using UnityEngine;
 public class NotesSEController : MonoBehaviour
 {
     [SerializeField] float deadTime;
-    [SerializeField] AudioSource audio;
+    [SerializeField] float playStartTime;
+    [SerializeField] AudioSource audioSource;
     float timer;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        //audio.Play();
+        audioSource.time = playStartTime;
+        audioSource.Play();
         timer = 0f;
     }
 

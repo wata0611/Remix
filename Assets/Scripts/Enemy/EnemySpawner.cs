@@ -5,11 +5,11 @@ using Utils;
 
 public class EnemySpawner : MonoBehaviour
 {
+    const string CSV_PATH = "CSV/EnemyAttackManager";
     const int TIME_IDX = 0;
     const int POS_IDX = 1;
     const int BEAM_ANGLE_IDX = 2;
 
-    [SerializeField] string enemySpawnDataCSVPath;
     [SerializeField] GameObject enemyObject;
     [SerializeField] GameManager gameManager;
     [SerializeField] Transform[] targetTransform;
@@ -39,11 +39,15 @@ public class EnemySpawner : MonoBehaviour
 
     void SetEnemySpawnDataList()
     {
-        List<string[]> dataList = CSVReader.ReadCSV(enemySpawnDataCSVPath);
+        List<string[]> dataList = CSVReader.ReadCSV(CSV_PATH);
         for(int i = 0; i < dataList.Count; i++)
         {
             EnemySpawnData enemySpawnData;
-            enemySpawnData.attackTime = float.Parse(dataList[i][TIME_IDX]);
+            if(!float.TryParse(dataList[i][TIME_IDX], out enemySpawnData.attackTime))
+            {
+                Debug.Log("i:" + i.ToString() + ", time:" + dataList[i][TIME_IDX]);
+            }
+            //enemySpawnData.attackTime = float.Parse(dataList[i][TIME_IDX]);
             enemySpawnData.targetPosNum = int.Parse(dataList[i][POS_IDX]);
             enemySpawnData.beamAngle = float.Parse(dataList[i][BEAM_ANGLE_IDX]);
             enemySpawnDataList.Add(enemySpawnData);
@@ -52,8 +56,8 @@ public class EnemySpawner : MonoBehaviour
 
     void SpawnManager()
     {
-        float enemySpawnTime = enemySpawnDataList[spawnEnemyIdx].attackTime - gameManager.EnemyAttackBufferTime;
         if (spawnEnemyIdx < enemySpawnDataList.Count) {
+            float enemySpawnTime = enemySpawnDataList[spawnEnemyIdx].attackTime - gameManager.EnemyAttackBufferTime;
             if (gameManager.ElapsedTime >= enemySpawnTime)
             {
                 SpawnEnemy(enemySpawnDataList[spawnEnemyIdx].attackTime ,enemySpawnDataList[spawnEnemyIdx].targetPosNum, enemySpawnDataList[spawnEnemyIdx].beamAngle);
