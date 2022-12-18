@@ -68,6 +68,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] PlayerController playerMove;
     [SerializeField] PlayerManager playerManager;
     [SerializeField] EnemyBoss enemy;
+    [SerializeField] GameStartPanelContrller startPanel;
+    [SerializeField] GameFadeIn gameFadeInPanel;
     [SerializeField] public float GameEndTime = 190f;
     [SerializeField] public float GameEndFadeTime = 5f;
 
@@ -160,14 +162,28 @@ public class GameManager : MonoBehaviour
                 StartMain();
                 if (DoneStartPhase)
                 {
-                    Instantiate(gameStartSound);
-                    startCanvas.SetActive(false);
-                    PlayPhase = PLAY_PHASE.INIT_PHASE;
+                    if (!startPanel.DoneFade && !startPanel.FadeOK)
+                    {
+                        Instantiate(gameStartSound);
+                        startPanel.FadeOK = true;
+                    }
+                    else if (startPanel.DoneFade)
+                    {
+                        startCanvas.SetActive(false);
+                        PlayPhase = PLAY_PHASE.INIT_PHASE;
+                    }
                 }
                 break;
             case PLAY_PHASE.INIT_PHASE:
-                PlayPhase = PLAY_PHASE.GAME_PHASE;
-                DoneInitPhase = true;
+                if(!gameFadeInPanel.DoneFade && !gameFadeInPanel.FadeOK)
+                {
+                    gameFadeInPanel.FadeOK = true;
+                }
+                else if (gameFadeInPanel.DoneFade)
+                {
+                    PlayPhase = PLAY_PHASE.GAME_PHASE;
+                    DoneInitPhase = true;
+                }
                 break;
             case PLAY_PHASE.GAME_PHASE:
                 if (!gameMusic.isPlaying)

@@ -14,6 +14,7 @@ public class EnemyBoss : MonoBehaviour
     [SerializeField] GameObject bossEliminatedSound;
     [SerializeField] GameObject flush;
     [SerializeField] float flushSpan = 0.1f;
+    [SerializeField] GameObject explosionEffect;
 
     public int HP { set; get; }
     public bool Eliminated { set; get; }

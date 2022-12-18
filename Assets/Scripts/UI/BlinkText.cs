@@ -8,6 +8,7 @@ public class BlinkText : MonoBehaviour
     [SerializeField] float showTime = 2f;
     [SerializeField] float hidetime = 0.5f;
     [SerializeField] Text text;
+    [SerializeField] GameStartPanelContrller startPanel;
 
     float timer;
     bool show = true;
@@ -40,12 +41,13 @@ public class BlinkText : MonoBehaviour
 
     void SwitchShowFlg()
     {
-        if(show && timer >= showTime)
+        if(show && timer >= showTime * (startPanel.FadeOK ? 0.3f : 1f))
         {
             show = false;
             timer = 0f;
         }
-        else if(!show && timer >= hidetime){
+        else if(!show && timer >= hidetime * (startPanel.FadeOK ? 0.3f : 1f))
+        {
             show = true;
             timer = 0f;
         }
