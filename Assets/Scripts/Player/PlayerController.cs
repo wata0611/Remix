@@ -41,16 +41,21 @@ public class PlayerController : MonoBehaviour
 
     private void Move()
     {
-        if (Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKey(KeyCode.W))
         {
-            Jump();
+            MoveUp();
         }
-        if (Input.GetKey(KeyCode.D)) {
+        else if (Input.GetKey(KeyCode.S))
+        {
+            MoveDown();
+        }
+        if (Input.GetKey(KeyCode.D))
+        {
             MoveRight();
         }
         else if (Input.GetKey(KeyCode.A))
         {
-            
+
             MoveLeft();
         }
     }
@@ -62,26 +67,30 @@ public class PlayerController : MonoBehaviour
 
     void MoveRight()
     {
-        if (transform.position.x < moveLimit)
-        {
-            transform.Translate(1.0f * moveSpeed, 0f, 0f);
-        }
+        transform.Translate(1.0f * moveSpeed, 0f, 0f);
+
     }
 
     void MoveLeft()
     {
-        if (transform.position.x > -moveLimit)
-        {
-            transform.Translate(-1.0f * moveSpeed, 0f, 0f);
-        }
+        transform.Translate(-1.0f * moveSpeed, 0f, 0f);
+    }
+
+    void MoveUp()
+    {
+        transform.Translate(0f, 1.0f * moveSpeed, 0f);
+    }
+
+    void MoveDown()
+    {
+        transform.Translate(-0f, -1.0f * moveSpeed, 0f);
     }
 
     public void Damage(int damage)
     {
         if (!invisible)
         {
-            playerManager.HP -= damage;
-            Debug.Log("HP:" + playerManager.HP.ToString());
+            playerManager.Damage(damage);
             invisible = true;
             visible = false;
         }
@@ -119,7 +128,7 @@ public class PlayerController : MonoBehaviour
         if (!visible)
         {
             renderer.color = new Color(renderer.color.r, renderer.color.g, renderer.color.b, 0f);
-            if(blinkTimer >= blinkUnVisibleTime)
+            if (blinkTimer >= blinkUnVisibleTime)
             {
                 visible = true;
                 blinkTimer = 0f;
@@ -128,7 +137,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             renderer.color = new Color(renderer.color.r, renderer.color.g, renderer.color.b, 1f);
-            if(blinkTimer >= blinkVisibleTime)
+            if (blinkTimer >= blinkVisibleTime)
             {
                 visible = false;
                 blinkTimer = 0f;

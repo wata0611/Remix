@@ -1747,6 +1747,8 @@ MonoBehaviour:
   playerHPText: {fileID: 2147146970}
   enemyHPSlider: {fileID: 600472885}
   enemyHPText: {fileID: 1218356895}
+  timeText: {fileID: 1461067351}
+  gameManager: {fileID: 1400974378}
 --- !u!1 &1142799743
 GameObject:
   m_ObjectHideFlags: 0
@@ -1911,9 +1913,17 @@ PrefabInstance:
       propertyPath: m_Offset.y
       value: -0.18
       objectReference: {fileID: 0}
+    - target: {fileID: 7324953349982274649, guid: 421d8eee940bae245afcbb993590d2b7, type: 3}
+      propertyPath: m_SortingOrder
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7324953349982274650, guid: 421d8eee940bae245afcbb993590d2b7, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 7324953349982274651, guid: 421d8eee940bae245afcbb993590d2b7, type: 3}
+      propertyPath: m_GravityScale
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7324953349982274654, guid: 421d8eee940bae245afcbb993590d2b7, type: 3}
       propertyPath: m_RootOrder

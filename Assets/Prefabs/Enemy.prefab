@@ -204,7 +204,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: baecaf7f1cb23b94589d4af85cc85ef0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 608cb6e32a6805847bd1a251107f5d07, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -229,3 +229,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   beam: {fileID: 844172914336195478}
   attackSound: {fileID: 3878324533705231295, guid: 59d210bd0ca6e4d4ca8a7840ad0e60fd, type: 3}
+  destroyTime: 1

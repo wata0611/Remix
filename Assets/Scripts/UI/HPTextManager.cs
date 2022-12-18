@@ -11,6 +11,8 @@ public class HPTextManager : MonoBehaviour
     [SerializeField] Text playerHPText;
     [SerializeField] Slider enemyHPSlider;
     [SerializeField] Text enemyHPText;
+    [SerializeField] Text timeText;
+    [SerializeField] GameManager gameManager;
 
     // Start is called before the first frame update
     void Start()
@@ -21,6 +23,7 @@ public class HPTextManager : MonoBehaviour
         enemyHPText.text = "ENEMYÅF" + enemy.HP.ToString();
         enemyHPSlider.maxValue = enemy.HP;
         enemyHPSlider.value = enemy.HP;
+        timeText.text = "TIME: " + ((int)gameManager.ElapsedTime).ToString() + "/" + "190";
     }
 
     // Update is called once per frame

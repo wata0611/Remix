@@ -12,7 +12,7 @@ public class EnemyAttack2BeamController : EnemyAttack2
     void Start()
     {
         elapsedTimeFromLaunch = 0f;
-        gameObject.SetActive(true);
+        gameObject.SetActive(false);
     }
 
     // Update is called once per frame
