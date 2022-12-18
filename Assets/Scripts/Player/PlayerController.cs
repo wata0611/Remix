@@ -21,6 +21,8 @@ public class PlayerController : MonoBehaviour
     float invisibleTimer;
     float blinkTimer;
 
+    public bool Movable { set; get; }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,12 +32,16 @@ public class PlayerController : MonoBehaviour
         invisible = false;
         invisibleTimer = 0f;
         blinkTimer = 0f;
+        Movable = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        Move();
+        if (Movable)
+        {
+            Move();
+        }
         Invisible();
     }
 
@@ -67,23 +73,23 @@ public class PlayerController : MonoBehaviour
 
     void MoveRight()
     {
-        transform.Translate(1.0f * moveSpeed, 0f, 0f);
+        transform.Translate(1.0f * Time.deltaTime * moveSpeed, 0f, 0f);
 
     }
 
     void MoveLeft()
     {
-        transform.Translate(-1.0f * moveSpeed, 0f, 0f);
+        transform.Translate(-1.0f * Time.deltaTime * moveSpeed, 0f, 0f);
     }
 
     void MoveUp()
     {
-        transform.Translate(0f, 1.0f * moveSpeed, 0f);
+        transform.Translate(0f, 1.0f * Time.deltaTime * moveSpeed, 0f);
     }
 
     void MoveDown()
     {
-        transform.Translate(-0f, -1.0f * moveSpeed, 0f);
+        transform.Translate(-0f, -1.0f * Time.deltaTime * moveSpeed, 0f);
     }
 
     public void Damage(int damage)

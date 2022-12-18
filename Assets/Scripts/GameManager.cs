@@ -1,8 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.IO;
 using Utils;
+using UnityEngine.SceneManagement;
 
 public enum GAME_PHASE
 {
@@ -59,6 +58,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject defenceWaitCanvas;
     [SerializeField] WaitUIController defenceWaitController;
     [SerializeField] AudioSource gameMusic;
+    [SerializeField] float gameMusicFadeTime;
     [SerializeField] GameObject startCanvas;
     [SerializeField] GameObject gameOverCanvas;
     [SerializeField] GameObject clearCanvas;
@@ -66,6 +66,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject attackMain;
     [SerializeField] GameObject defenceMain;
     [SerializeField] PlayerController playerMove;
+    [SerializeField] PlayerManager playerManager;
+    [SerializeField] EnemyBoss enemy;
+    [SerializeField] public float GameEndTime = 190f;
+    [SerializeField] public float GameEndFadeTime = 5f;
+
+    float musicVolume;
+    float fadeTimer;
 
     private void Awake()
     {
@@ -85,6 +92,9 @@ public class GameManager : MonoBehaviour
         DoneInitPhase = false;
         DoneGamePhase = false;
         DoneEndPhase = false;
+        GameOverFlg = false;
+        GameClearFlg = false;
+        musicVolume = gameMusic.volume;
     }
 
     // Update is called once per frame
@@ -163,11 +173,52 @@ public class GameManager : MonoBehaviour
                     gameMusic.Play();
                 }
 
-                ElapsedTime += Time.deltaTime;
+                if (ElapsedTime < GameEndTime)
+                {
+                    ElapsedTime += Time.deltaTime;
+                }
+                else
+                {
+                    GameOverFlg = true;
+                    DoneGamePhase = true;
+                }
                 StateManager();
                 GamePhaseMain();
+                if (DoneGamePhase)
+                {
+                    playerMove.Movable = false;
+                    PlayPhase = PLAY_PHASE.EMD_PHASE;
+                }
                 break;
             case PLAY_PHASE.EMD_PHASE:
+                if (GameOverFlg)
+                {
+                    gameOverCanvas.SetActive(true);
+                }
+                else if(GameClearFlg){
+                    clearCanvas.SetActive(true);
+                }
+                else
+                {
+                    Debug.Log("END_PHASE_ERROR");
+                    DoneEndPhase = true;
+                }
+
+                fadeTimer += Time.deltaTime;
+                float volumeRate = fadeTimer / GameEndFadeTime;
+                gameMusic.volume = musicVolume * (1f-volumeRate);
+                if(fadeTimer >= GameEndFadeTime)
+                {
+                    DoneEndPhase = true;
+                }
+
+                if (DoneEndPhase)
+                {
+                    if (Input.anyKeyDown)
+                    {
+                        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                    }
+                }
                 break;
             default:
                 break;
@@ -222,6 +273,12 @@ public class GameManager : MonoBehaviour
                 {
                     BeforeGamePhase = BEFORE_GAME_PHASE.ATTACK_PHASE;
                 }
+
+                if (enemy.HP == 0)
+                {
+                    GameClearFlg = true;
+                    DoneGamePhase = true;
+                }
                 break;
 
             case GAME_PHASE.DEFENCE_PHASE:
@@ -237,6 +294,12 @@ public class GameManager : MonoBehaviour
                 if (BeforeGamePhase != BEFORE_GAME_PHASE.DEFENCE_PHASE)
                 {
                     BeforeGamePhase = BEFORE_GAME_PHASE.DEFENCE_PHASE;
+                }
+                
+                if(playerManager.HP == 0)
+                {
+                    GameOverFlg = true;
+                    DoneGamePhase = true;
                 }
                 break;
         }

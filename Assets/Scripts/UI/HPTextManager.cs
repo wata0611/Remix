@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -23,7 +22,7 @@ public class HPTextManager : MonoBehaviour
         enemyHPText.text = "ENEMYÅF" + enemy.HP.ToString();
         enemyHPSlider.maxValue = enemy.HP;
         enemyHPSlider.value = enemy.HP;
-        timeText.text = "TIME: " + ((int)gameManager.ElapsedTime).ToString() + "/" + "190";
+        timeText.text = "TIME: " + ((int)gameManager.ElapsedTime).ToString() + "/" + gameManager.GameEndTime.ToString();
     }
 
     // Update is called once per frame
@@ -38,5 +37,6 @@ public class HPTextManager : MonoBehaviour
         enemyHPText.text = "ENEMYÅF" + enemy.HP.ToString();
         playerHPSlider.value = player.HP;
         enemyHPSlider.value = enemy.HP;
+        timeText.text = "TIME: " + ((int)gameManager.ElapsedTime).ToString() + "/" + gameManager.GameEndTime.ToString();
     }
 }
