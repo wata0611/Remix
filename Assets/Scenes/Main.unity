@@ -2365,6 +2365,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 576232279}
     - target: {fileID: 5180870409672227822, guid: db103f58e3b72844f8c8482b1104ac42, type: 3}
+      propertyPath: gameStartSound
+      value: 
+      objectReference: {fileID: 6287278459684885452, guid: 44d91da58f2e9b74897b5b9707ed1ff4, type: 3}
+    - target: {fileID: 5180870409672227822, guid: db103f58e3b72844f8c8482b1104ac42, type: 3}
       propertyPath: attackWaitCanvas
       value: 
       objectReference: {fileID: 769268346}

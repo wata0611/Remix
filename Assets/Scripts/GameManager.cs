@@ -59,6 +59,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject startCanvas;
     [SerializeField] GameObject gameOverCanvas;
     [SerializeField] GameObject clearCanvas;
+    [SerializeField] GameObject gameStartSound;
 
     private void Awake()
     {
@@ -141,6 +142,7 @@ public class GameManager : MonoBehaviour
                 StartMain();
                 if (DoneStartPhase)
                 {
+                    Instantiate(gameStartSound);
                     startCanvas.SetActive(false);
                     PlayPhase = PLAY_PHASE.INIT_PHASE;
                 }
