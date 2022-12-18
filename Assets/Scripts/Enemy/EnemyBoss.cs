@@ -12,6 +12,8 @@ public class EnemyBoss : MonoBehaviour
     [SerializeField] float randXrange = 0.1f;
     [SerializeField] float downSpeed = 1f;
     [SerializeField] GameObject bossEliminatedSound;
+    [SerializeField] GameObject flush;
+    [SerializeField] float flushSpan = 0.1f;
 
     public int HP { set; get; }
     public bool Eliminated { set; get; }
@@ -24,6 +26,9 @@ public class EnemyBoss : MonoBehaviour
 
     bool playEliminatedSound;
 
+    int flushCount;
+    float blinkTimer;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -34,6 +39,8 @@ public class EnemyBoss : MonoBehaviour
         effectStart = false;
         DoneEffect = false;
         playEliminatedSound = false;
+        flushCount = 0;
+        blinkTimer = 0f;
     }
 
     // Update is called once per frame
@@ -68,13 +75,12 @@ public class EnemyBoss : MonoBehaviour
     {
         if (Eliminated && !DoneEffect)
         {
-            if (!playEliminatedSound)
+            eliminatedEffectTimer += Time.deltaTime;
+            if(eliminatedEffectTimer <= noneSpan)
             {
-                Instantiate(bossEliminatedSound);
-                playEliminatedSound = true;
+                Flush();
             }
 
-            eliminatedEffectTimer += Time.deltaTime;
             if (eliminatedEffectTimer > noneSpan)
             {
                 effectStart = true;
@@ -82,6 +88,11 @@ public class EnemyBoss : MonoBehaviour
 
             if (effectStart)
             {
+                if (!playEliminatedSound)
+                {
+                    Instantiate(bossEliminatedSound);
+                    playEliminatedSound = true;
+                }
                 FadeEffect(eliminatedEffectTimer);
             }
         }
@@ -110,5 +121,24 @@ public class EnemyBoss : MonoBehaviour
             posX = initPos.x + randXrange;
         }
         transform.position = new Vector3(posX, transform.position.y - Time.deltaTime * downSpeed, 0f);
+    }
+
+    void Flush()
+    {
+        blinkTimer += Time.deltaTime;
+        if(blinkTimer >= flushSpan && flushCount < 3)
+        {
+            flush.SetActive(!flush.activeSelf);
+            if (flush.activeSelf)
+            {
+                flushCount++;
+            }
+            blinkTimer = 0f;
+        }
+
+        if(flushCount >= 3)
+        {
+            flush.SetActive(false);
+        }
     }
 }

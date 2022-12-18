@@ -64,7 +64,7 @@ public class EnemyAttackController3 : MonoBehaviour
         {
             if (!fadeOutOK)
             {
-                fadeTime = 0f;
+                fadeTimer = 0f;
                 fadeOutOK = true;
 
             }

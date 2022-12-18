@@ -142,5 +142,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deadTime: 1
-  playStartTime: 0.25
+  playStartTime: 0.37
   audioSource: {fileID: 8267636865678069014}

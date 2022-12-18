@@ -73,7 +73,7 @@ public class GameManager : MonoBehaviour
 
     float musicVolume;
     float fadeTimer;
-    bool canvasEffectOK;
+    public bool CanvasEffectOK { set; get; }
 
     private void Awake()
     {
@@ -95,7 +95,7 @@ public class GameManager : MonoBehaviour
         DoneEndPhase = false;
         GameOverFlg = false;
         GameClearFlg = false;
-        canvasEffectOK = false;
+        CanvasEffectOK = false;
         musicVolume = gameMusic.volume;
     }
 
@@ -196,23 +196,23 @@ public class GameManager : MonoBehaviour
                 if (GameOverFlg)
                 {
                     gameOverCanvas.SetActive(true);
-                    canvasEffectOK = true;
+                    CanvasEffectOK = true;
                 }
                 else if(GameClearFlg){
                     clearCanvas.SetActive(true);
                     if (enemy.DoneEffect)
                     {
-                        canvasEffectOK = true;
+                        CanvasEffectOK = true;
                     }
                 }
                 else
                 {
                     Debug.Log("END_PHASE_ERROR");
                     DoneEndPhase = true;
-                    canvasEffectOK = true;
+                    CanvasEffectOK = true;
                 }
 
-                if (canvasEffectOK)
+                if (CanvasEffectOK)
                 {
                     fadeTimer += Time.deltaTime;
                     float volumeRate = fadeTimer / GameEndFadeTime;

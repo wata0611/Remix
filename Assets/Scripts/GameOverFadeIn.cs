@@ -8,9 +8,6 @@ public class GameOverFadeIn : MonoBehaviour
     [SerializeField] GameManager gameManager;
     [SerializeField] Text[] textList;
     [SerializeField] Image[] imgList;
-
-    float alfa;    //A値を操作するための変数
-    float red, green, blue;    //RGBを操作するための変数
     public bool DoneFadeIn { set; get; }
     float fadeStartTimer;
 
@@ -23,7 +20,7 @@ public class GameOverFadeIn : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (gameManager.PlayPhase == PLAY_PHASE.EMD_PHASE)
+        if (gameManager.PlayPhase == PLAY_PHASE.EMD_PHASE && gameManager.CanvasEffectOK)
         {
             fadeStartTimer += Time.deltaTime;
             float alpha = fadeStartTimer / gameManager.GameEndFadeTime;
