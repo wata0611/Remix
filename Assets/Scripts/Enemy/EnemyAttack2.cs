@@ -15,7 +15,7 @@ public class EnemyAttack2 : EnemyAttackAbstract
     {
         base.Start();
         LaunchFlg = false;
-        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+        //gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         beam.SetActive(false);
     }
 

@@ -2,14 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyAttack2BeamController : EnemyAttack2
+public class EnemyAttack2BeamController : MonoBehaviour
 {
+    [SerializeField] int damage = 10;
     [SerializeField] float vanishBeamTime = 5f;
 
     float elapsedTimeFromLaunch;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         elapsedTimeFromLaunch = 0f;
         gameObject.SetActive(false);

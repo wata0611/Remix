@@ -73,6 +73,7 @@ public class GameManager : MonoBehaviour
 
     float musicVolume;
     float fadeTimer;
+    bool canvasEffectOK;
 
     private void Awake()
     {
@@ -94,6 +95,7 @@ public class GameManager : MonoBehaviour
         DoneEndPhase = false;
         GameOverFlg = false;
         GameClearFlg = false;
+        canvasEffectOK = false;
         musicVolume = gameMusic.volume;
     }
 
@@ -194,22 +196,31 @@ public class GameManager : MonoBehaviour
                 if (GameOverFlg)
                 {
                     gameOverCanvas.SetActive(true);
+                    canvasEffectOK = true;
                 }
                 else if(GameClearFlg){
                     clearCanvas.SetActive(true);
+                    if (enemy.DoneEffect)
+                    {
+                        canvasEffectOK = true;
+                    }
                 }
                 else
                 {
                     Debug.Log("END_PHASE_ERROR");
                     DoneEndPhase = true;
+                    canvasEffectOK = true;
                 }
 
-                fadeTimer += Time.deltaTime;
-                float volumeRate = fadeTimer / GameEndFadeTime;
-                gameMusic.volume = musicVolume * (1f-volumeRate);
-                if(fadeTimer >= GameEndFadeTime)
+                if (canvasEffectOK)
                 {
-                    DoneEndPhase = true;
+                    fadeTimer += Time.deltaTime;
+                    float volumeRate = fadeTimer / GameEndFadeTime;
+                    gameMusic.volume = musicVolume * (1f - volumeRate);
+                    if (fadeTimer >= GameEndFadeTime)
+                    {
+                        DoneEndPhase = true;
+                    }
                 }
 
                 if (DoneEndPhase)
@@ -276,6 +287,7 @@ public class GameManager : MonoBehaviour
 
                 if (enemy.HP == 0)
                 {
+                    enemy.Eliminated = true;
                     GameClearFlg = true;
                     DoneGamePhase = true;
                 }

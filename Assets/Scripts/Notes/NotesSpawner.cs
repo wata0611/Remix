@@ -39,7 +39,7 @@ public class NotesSpawner : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         SpawnManager();
     }
